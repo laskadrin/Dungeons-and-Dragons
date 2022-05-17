@@ -1,0 +1,28 @@
+.armoury-table {
+    width: 90vw;
+    margin-bottom: 5vh;
+}
+
+
+td:nth-of-type(2),
+td:nth-of-type(5) {
+    width: 20%;
+}
+
+td:nth-of-type(1),
+td:nth-of-type(4) {
+    width: 12%;
+}
+
+td:nth-of-type(3) {
+    width: 36%;
+}
+
+.background {
+    height: 100%;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}

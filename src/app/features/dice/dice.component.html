@@ -1,0 +1,25 @@
+<div class="alignStyle">
+    <div class="rollSection alignStyle">
+        <div class="descText">Оберіть кількість граней:</div>
+        <div class="alignStyle">
+            <div class="diceSizes">
+                <button *ngFor="let size of diceSizes" class="diceSizeOption" (click)="chooseDiceSize(size)"
+                    [class.active]="size===diceSize">{{size}}</button>
+            </div>
+            <button class="diceRollButton" (click)="diceRoll()">Кинути кості</button>
+        </div>
+        <div class="alignStyle">
+            <div class="descText">Або киньте нестандартні кості:</div>
+            <div class="diceRollCustomSize">
+                <input type="number" [formControl]="customDiceSizeFormControl">
+                <button (click)="rollCustomDiceSize()">Кинути кості</button>
+            </div>
+        </div>
+        <div class="diceResult"> Ваш результат: {{isRolling?rollingProgress:result}}</div>
+    </div>
+    <div class="fail" *ngIf="(result===1)&&(diceSize===20)">Критичний провал</div>
+    <div class="succes" *ngIf="(result===20)&&(diceSize===20)">Критичний успіх</div>
+</div>
+<div class="img">
+    <img src="/assets/Dice.jpg" alt="" class="background">
+</div>

@@ -1,0 +1,43 @@
+<mat-tab-group>
+    <mat-tab label="Головна">
+        <div class="tab-padd">
+            <img src="/assets/mountains.png" alt="" class="background">
+            <h1>Welcome to Dungeons And Dragons Dashboard</h1>
+            <h2>Built by Vittom</h2>
+        </div>
+    </mat-tab>
+    <mat-tab label="Профіль гравця">
+        <div>
+
+        </div>
+    </mat-tab>
+    <mat-tab label="Наш світ">
+        <div class="tab-padd">
+            <app-world-info></app-world-info>
+        </div>
+    </mat-tab>
+    <mat-tab label="Правила">
+        <div>
+
+        </div>
+    </mat-tab>
+    <mat-tab label="Зброярня">
+        <div class="tab-padd">
+            <app-armoury></app-armoury>
+        </div>
+    </mat-tab>
+    <mat-tab label="Класи та раси">
+        <div>
+
+        </div>
+    </mat-tab>
+    <mat-tab label="Кинути кубик">
+        <div class="tab-padd">
+            <app-dice></app-dice>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+<div class="nav-right">
+    <span class="hello">Привіт, {{this.hiuser}}</span>
+    <a (click)="logout()">Вийти</a>
+</div>
