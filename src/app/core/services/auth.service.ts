@@ -2,6 +2,7 @@ import { Auth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, 
 
 import { Injectable, OnInit } from '@angular/core';
 import { LoginData } from '../interfaces/login-data.interface';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class AuthService {
   }
 
   register({ email, password }: LoginData) {
+
     return createUserWithEmailAndPassword(this.auth, email, password)
   }
 

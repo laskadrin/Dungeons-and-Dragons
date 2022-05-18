@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent implements OnInit {
 
+  errorCode: string = '';
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router
@@ -20,10 +21,13 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(data: LoginData) {
+    this.errorCode = ''
     this.authService
       .register(data)
-      .then(() => this.router.navigate(['/login']))
-      .catch((e) => console.log(e.message));
+      .then(() => {
+        this.router.navigate(['/login']);
+      })
+      .catch((e) => this.errorCode = e.code);
   }
 
 }

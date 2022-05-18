@@ -33,7 +33,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formData.emit(this.form.value);
+    if (this.form.valid) {
+      this.formData.emit(this.form.value);
+    }
   }
+
 
 }

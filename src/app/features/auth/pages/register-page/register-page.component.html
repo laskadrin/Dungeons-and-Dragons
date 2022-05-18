@@ -13,5 +13,8 @@
             </p>
             <button mat-button routerLink="/">Sign in</button>
         </div>
+        <div *ngIf="errorCode == 'auth/email-already-in-use'">
+            <span>Sorry, email already in use</span>
+        </div>
     </div>
 </div>
