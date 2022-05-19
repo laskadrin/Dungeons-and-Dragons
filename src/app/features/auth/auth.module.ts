@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
+
+
 @NgModule({
   declarations: [
     LoginPageComponent,
@@ -24,6 +26,8 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+
+
   ]
 
 })

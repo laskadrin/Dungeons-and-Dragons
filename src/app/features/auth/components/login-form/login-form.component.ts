@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -14,8 +15,9 @@ export class LoginFormComponent implements OnInit {
   }> = new EventEmitter();
 
   form: FormGroup;
-
-  constructor(private fb: FormBuilder) { }
+  regMessage: string;
+  constructor(private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -33,6 +35,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
+
     if (this.form.valid) {
       this.formData.emit(this.form.value);
     }
