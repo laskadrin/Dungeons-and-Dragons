@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
+  errorCode: string = '';
+  loginMessage: string = '';
+  errorOccured: boolean = false;
+
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router
@@ -23,7 +27,20 @@ export class LoginPageComponent implements OnInit {
     this.authService
       .login(loginData)
       .then(() => this.router.navigate(['/dashboard']))
-      .catch((e) => console.log(e.messege));
+      .catch((e) => {
+        console.log(e.code)
+        this.errorCode = e.code;
+        if (this.errorCode == 'auth/user-not-found') {
+          this.errorOccured = true;
+          this.loginMessage = 'Користувача не знайдено. Перевірте правильність написання електронної пошти або, якщо ви цього ще не зробили,  зареєструйтесь';
+        } else if (this.errorCode == 'auth/wrong-password') {
+          this.errorOccured = true;
+          this.loginMessage = 'Ви ввели неправильний пароль'
+        } else {
+          this.errorOccured = true;
+          this.loginMessage = 'Невідома помилка. Будь ласка, посторіть спробу входу пізніше'
+        }
+      });
   }
   loginWithGoogle() {
     this.authService

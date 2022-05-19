@@ -1,8 +1,8 @@
 <div class="background">
     <div class="login-container">
         <div class="form-container">
-            <h1>Welcome to Dungeons And Dragons Register</h1>
-            <h5>Register with your email</h5>
+            <h1>Вітаємо на сторінці реєстрації Dungeons And Dragons</h1>
+            <h5>Зареєструйтесь із використанням E-mail</h5>
             <app-login-form (formData)="register($event)"></app-login-form>
             <div class="error" *ngIf="errorOccured">
                 {{regMessage}}
@@ -12,12 +12,11 @@
             </div>
         </div>
         <div class="text-container">
-            <h1>Hey Buddy</h1>
+            <h1>Агов, друже!</h1>
             <p>
-                Already have an awesome account? Go ahead and click the button below to
-                sign in!
+                Уже маєш суперський акаунт? Тоді вперед, натисни кнопку нижче для входу!
             </p>
-            <button mat-button routerLink="/">Sign in</button>
+            <button mat-button routerLink="/">Вхід</button>
         </div>
     </div>
 </div>

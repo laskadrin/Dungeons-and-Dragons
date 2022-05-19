@@ -30,7 +30,7 @@ export class RegisterPageComponent implements OnInit {
     this.authService
       .register(data)
       .then(() => {
-        this.regMessage = 'Success! Redirecting to sign in page.';
+        this.regMessage = 'Обліковий запис створенно. Перенаправляємо на сторінку входу.';
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 3000)
@@ -40,18 +40,18 @@ export class RegisterPageComponent implements OnInit {
         this.errorCode = e.code;
         if (this.errorCode == 'auth/email-already-in-use') {
           this.errorOccured = true;
-          this.regMessage = 'Sorry, email already exists';
+          this.regMessage = 'Користувач із таким E-mail уже існує';
         } else
           if (this.errorCode == 'auth/weak-password') {
             this.errorOccured = true;
-            this.regMessage = 'Sorry, password is too weak';
+            this.regMessage = 'Пароль заслабкий. Введіть принаймні 6 символів';
           } else
             if (this.errorCode == 'auth/invalid-email') {
               this.errorOccured = true;
-              this.regMessage = 'Sorry, email is invalid';
+              this.regMessage = 'E-mail некоректний або неіснуючий';
             } else {
               this.errorOccured = true;
-              this.regMessage = 'Unknown error, please try again later';
+              this.regMessage = 'Невідома помилка. Будь ласка, повторіть спробу пізніше';
             };
       });
   }

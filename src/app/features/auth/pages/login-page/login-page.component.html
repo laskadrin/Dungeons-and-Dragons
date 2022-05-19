@@ -1,21 +1,24 @@
 <div class="background">
     <div class="login-container">
         <div class="text-container">
-            <h1>Hey Stranger</h1>
+            <h1>Привіт незнайомцю!</h1>
             <p>
-                Want to create an awesome account to access this awesome app? Go ahead
-                and click the button below!
+                Бажаєш створити крутецький акаунт для доступу до цього сайту? Уперед, натисни кнопку нижче!
             </p>
-            <button mat-button routerLink="/register">Sign up</button>
+            <button mat-button routerLink="/register">Реєстрація</button>
+
         </div>
         <div class="form-container">
-            <h1>Welcome to Dungeons and Dragons Login</h1>
+            <h1>Ласкаво просимо на сторінку авторизації Dungeons and Dragons</h1>
             <button class="mat-raised-button" (click)="loginWithGoogle()">
                 <img src="../../../../../assets/Google.png" alt="Google Logo">
-                <div> Sign In with Google</div>
+                <div> Ввійти через Google</div>
             </button>
-            <h5>Or sign in with your email</h5>
+            <h5>Або авторизуйтесь, використовуючи E-mail</h5>
             <app-login-form (formData)="login($event)"></app-login-form>
+            <div class="error" *ngIf="errorOccured">
+                {{loginMessage}}
+            </div>
         </div>
 
     </div>
