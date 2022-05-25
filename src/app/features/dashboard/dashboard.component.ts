@@ -16,8 +16,10 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
-
+  isAdmin: boolean = false;
   ngOnInit(): void {
+
+    this.isAdmin = this.authService.isAdmin();
   }
 
   hiuser = getAuth().currentUser?.email;

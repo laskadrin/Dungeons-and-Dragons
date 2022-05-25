@@ -14,7 +14,6 @@ export class LoginPageComponent implements OnInit {
   errorCode: string = '';
   loginMessage: string = '';
   errorOccured: boolean = false;
-
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router
