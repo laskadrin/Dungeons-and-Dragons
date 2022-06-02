@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group mat-align-tabs="end">
     <mat-tab label="Головна">
         <div class="tab-padd">
             <img src="/assets/mountains.png" alt="" class="background">
@@ -23,7 +23,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Зброярня">
-        <div class="tab-padd">
+        <div class="tab-padd background-armoury">
             <app-armoury></app-armoury>
         </div>
     </mat-tab>
@@ -37,8 +37,11 @@
             <app-dice></app-dice>
         </div>
     </mat-tab>
+    <mat-tab disabled label="Привіт, {{this.hiuser}}">
+    </mat-tab>
+    <mat-tab disabled>
+        <ng-template mat-tab-label>
+            <a (click)="logout()">Вийти</a>
+        </ng-template>
+    </mat-tab>
 </mat-tab-group>
-<div class="nav-right">
-    <span class="hello">Привіт, {{this.hiuser}}</span>
-    <a (click)="logout()">Вийти</a>
-</div>

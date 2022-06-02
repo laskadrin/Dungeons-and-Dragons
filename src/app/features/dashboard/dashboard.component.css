@@ -30,21 +30,6 @@ a:hover {
     cursor: pointer;
 }
 
-.nav-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: absolute;
-    top: 15px;
-    right: 1%;
-    z-index: 10;
-    font-size: large;
-}
-
-.hello {
-    margin-right: 10px;
-}
-
 .background {
     height: 100%;
     width: 100vw;
@@ -52,4 +37,13 @@ a:hover {
     top: 0;
     left: 0;
     z-index: -10;
+}
+
+.background-armoury {
+    background-color: rgb(162, 218, 240);
+    height: 100%;
+}
+
+.mat-tab-label {
+    color: red
 }
