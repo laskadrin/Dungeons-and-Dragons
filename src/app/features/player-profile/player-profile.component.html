@@ -1,0 +1,63 @@
+<mat-tab-group>
+    <mat-tab label="Особистий кабінет">
+        <div class="personal-main">
+            <div class="personal-photo">
+                <img src="../../../assets/default-profile-avatar.png" alt="">
+                <div class="photo-change">
+                    <label for="avatar">Змінити фото профіля</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" hidden />
+                </div>
+            </div>
+            <div class="personal-info">
+                <div class="personal-username">
+                    <span> Ваш псевдонім: </span>
+                    <div>
+                        <span>{{this.pseudoname}} </span>
+                        <button class="btn">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="personal-email">
+                    <span> Ваша електронна пошта: </span>
+                    <div>
+                        <span>{{this.email}} </span>
+                        <button class="btn">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="personal-password">
+                    <button class="pass-change">Змінити пароль</button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Персонажі">
+        <div class="characters-main">
+            <div class="characters-list">
+
+            </div>
+            <div class="characters-info">
+                <div class="characters-name">
+
+                </div>
+                <div class="characters-stats">
+                    <div class="stats-main">
+
+                    </div>
+                    <div class="stats-secondary">
+
+                    </div>
+                    <div class="inventory">
+
+                    </div>
+                </div>
+                <div class="characters-additionary">
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

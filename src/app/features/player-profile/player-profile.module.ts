@@ -5,6 +5,7 @@ import { PlayerProfileRoutingModule } from './player-profile-routing.module';
 import { PlayerProfileComponent } from './player-profile.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatTabsModule,
     ReactiveFormsModule,
+    MatIconModule
 
   ],
   exports: [
