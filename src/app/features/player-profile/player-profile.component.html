@@ -12,7 +12,7 @@
                 <div class="personal-username">
                     <span> Ваш псевдонім: </span>
                     <div>
-                        <span>{{this.pseudoname}} </span>
+                        <span>{{this.displayName}} </span>
                         <button class="btn">
                             <mat-icon>edit</mat-icon>
                         </button>
@@ -29,7 +29,35 @@
 
                 </div>
                 <div class="personal-password">
-                    <button class="pass-change">Змінити пароль</button>
+                    <button mat-button type="button" class="triger" (click)="passwordFormButton()"
+                        *ngIf="passwordChangeActive === false">Змінити
+                        пароль</button>
+                    <div>
+                        {{successMessage}}
+                    </div>
+                    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="passwordChangeActive">
+
+                        <mat-form-field class="form-control">
+                            <mat-label>Новий пароль</mat-label>
+                            <input matInput formControlName="newPassword" type="password" required />
+                            <mat-error *ngIf="newPassword?.hasError('required')">
+                                Введіть новий пароль
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="form-control">
+                            <mat-label>Підтвердження нового паролю</mat-label>
+                            <input matInput formControlName="newPasswordConfirm" type="password" required />
+                            <mat-error *ngIf="newPasswordConfirm?.hasError('required')">
+                                Введіть підтвердження нового паролю
+                            </mat-error>
+                        </mat-form-field>
+                        <div *ngIf="errorOccured">
+                            {{changeMessage}}
+                        </div>
+                        <div class="form-footer">
+                            <button mat-button type="submit">Змінити пароль</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

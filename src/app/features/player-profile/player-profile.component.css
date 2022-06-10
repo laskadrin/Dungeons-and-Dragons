@@ -86,3 +86,34 @@ label {
 }
 
 /* Darker background on mouse-over */
+
+
+
+form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 200px;
+    width: 300px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.form-footer>button {
+    background-color: indigo;
+    border-radius: 20px;
+    color: #fff;
+    padding: 0 50px;
+
+}
+
+.triger {
+    background-color: indigo;
+    border-radius: 20px;
+    color: #fff;
+    padding: 0 50px;
+
+}
