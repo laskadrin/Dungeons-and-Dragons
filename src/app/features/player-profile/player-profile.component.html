@@ -36,7 +36,13 @@
                         {{successMessage}}
                     </div>
                     <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="passwordChangeActive">
-
+                        <mat-form-field class="form-control">
+                            <mat-label>Старий пароль</mat-label>
+                            <input matInput formControlName="oldPassword" type="password" required />
+                            <mat-error *ngIf="oldPassword?.hasError('required')">
+                                Введіть старий пароль
+                            </mat-error>
+                        </mat-form-field>
                         <mat-form-field class="form-control">
                             <mat-label>Новий пароль</mat-label>
                             <input matInput formControlName="newPassword" type="password" required />

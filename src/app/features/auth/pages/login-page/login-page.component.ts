@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit {
           this.loginMessage = 'Ви ввели неправильний пароль'
         } else {
           this.errorOccured = true;
-          this.loginMessage = 'Невідома помилка. Будь ласка, посторіть спробу входу пізніше'
+          this.loginMessage = 'Невідома помилка. Будь ласка, повторіть спробу входу пізніше'
         }
       });
   }
