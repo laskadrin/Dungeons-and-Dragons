@@ -29,7 +29,7 @@
 .personal-username {
 
     margin-left: 3vw;
-    width: 40vw;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38,7 +38,7 @@
 
 .personal-email {
     margin-left: 3vw;
-    width: 40vw;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -89,24 +89,33 @@ label {
 
 
 
-form {
+.form {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 200px;
-    width: 300px;
+    width: 40%;
 }
 
-mat-form-field {
+.form>mat-form-field {
     width: 100%;
 }
 
-.form-footer>button {
+.nameForm {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+}
+
+
+
+.submit-Button {
     background-color: indigo;
     border-radius: 20px;
     color: #fff;
-    padding: 0 50px;
+
 
 }
 
@@ -116,4 +125,20 @@ mat-form-field {
     color: #fff;
     padding: 0 50px;
 
+}
+
+.password-success {
+    color: green;
+}
+
+.password-error {
+    color: red;
+}
+
+.username-success {
+    color: green;
+}
+
+.username-error {
+    color: red;
 }

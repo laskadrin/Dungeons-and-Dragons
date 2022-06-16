@@ -2,7 +2,7 @@
     <mat-tab label="Особистий кабінет">
         <div class="personal-main">
             <div class="personal-photo">
-                <img src="../../../assets/default-profile-avatar.png" alt="">
+                <img src={{photoPath}} alt="Ваше фото">
                 <div class="photo-change">
                     <label for="avatar">Змінити фото профіля</label>
                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" hidden />
@@ -13,10 +13,29 @@
                     <span> Ваш псевдонім: </span>
                     <div>
                         <span>{{this.displayName}} </span>
-                        <button class="btn">
+                        <button class="btn" type="button" (click)="displayNameFormButton()">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </div>
+                    <form class="nameForm" [formGroup]="nameForm" (ngSubmit)="onSubmit()"
+                        *ngIf="displayNameChangeActive">
+                        <mat-form-field class="form-control">
+                            <mat-label>Новий псевдонім</mat-label>
+
+                            <input matInput formControlName="newDisplayName" type="text" required="">
+                            <mat-error *ngIf="newDisplayName?.hasError('required')">Введіть новий псевдонім
+                            </mat-error>
+
+                        </mat-form-field>
+
+                        <button mat-button type="submit" class="submit-Button">Змінити псевдонім</button>
+
+                    </form>
+
+                </div>
+                <div class="personal-username">
+                    <div class="username-success">{{successNameMessage}}</div>
+                    <div class="username-error">{{changeNameMessage}}</div>
                 </div>
                 <div class="personal-email">
                     <span> Ваша електронна пошта: </span>
@@ -32,7 +51,7 @@
                     <button mat-button type="button" class="triger" (click)="passwordFormButton()"
                         *ngIf="passwordChangeActive === false">Змінити
                         пароль</button>
-                    <div>
+                    <div class="password-success">
                         {{successMessage}}
                     </div>
                     <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="passwordChangeActive">
@@ -57,11 +76,11 @@
                                 Введіть підтвердження нового паролю
                             </mat-error>
                         </mat-form-field>
-                        <div *ngIf="errorOccured">
+                        <div *ngIf="errorOccured" class="password-error">
                             {{changeMessage}}
                         </div>
                         <div class="form-footer">
-                            <button mat-button type="submit">Змінити пароль</button>
+                            <button class="submit-Button" mat-button type="submit">Змінити пароль</button>
                         </div>
                     </form>
                 </div>
