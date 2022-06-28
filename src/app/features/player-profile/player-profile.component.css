@@ -29,7 +29,7 @@
 .personal-username {
 
     margin-left: 3vw;
-    width: 90%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38,7 +38,7 @@
 
 .personal-email {
     margin-left: 3vw;
-    width: 90%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -109,6 +109,13 @@ label {
     justify-content: space-between;
 }
 
+.emailForm {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: space-between;
+}
+
 
 
 .submit-Button {
@@ -127,18 +134,16 @@ label {
 
 }
 
-.password-success {
+
+
+.password-success,
+.username-success,
+.email-success {
     color: green;
 }
 
-.password-error {
-    color: red;
-}
-
-.username-success {
-    color: green;
-}
-
-.username-error {
+.password-error,
+.username-error,
+.email-error {
     color: red;
 }

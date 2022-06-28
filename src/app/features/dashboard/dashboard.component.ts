@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  hiuser = getAuth().currentUser?.email;
+  hiuser = getAuth().currentUser?.displayName;
   logout() {
     this.authService
       .logout()

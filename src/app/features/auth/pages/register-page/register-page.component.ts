@@ -38,19 +38,20 @@ export class RegisterPageComponent implements OnInit {
       })
       .catch((e) => {
         this.errorCode = e.code;
+        this.errorOccured = true;
         if (this.errorCode == 'auth/email-already-in-use') {
-          this.errorOccured = true;
+
           this.regMessage = 'Користувач із таким E-mail уже існує';
         } else
           if (this.errorCode == 'auth/weak-password') {
-            this.errorOccured = true;
+
             this.regMessage = 'Пароль заслабкий. Введіть принаймні 6 символів';
           } else
             if (this.errorCode == 'auth/invalid-email') {
-              this.errorOccured = true;
+
               this.regMessage = 'E-mail некоректний або неіснуючий';
             } else {
-              this.errorOccured = true;
+
               this.regMessage = 'Невідома помилка. Будь ласка, повторіть спробу пізніше';
             };
       });
