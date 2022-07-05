@@ -85,6 +85,8 @@ export class PlayerProfileComponent implements OnInit {
   successEmailMessage: string = '';
   errorEmailOccured: boolean = false;
 
+  passMenuText: string = 'Меню зміни паролю'
+
 
 
 
@@ -209,6 +211,11 @@ export class PlayerProfileComponent implements OnInit {
   }
   passwordFormButton() {
     this.passwordChangeActive = !this.passwordChangeActive;
+    if (this.passwordChangeActive) {
+      this.passMenuText = 'Приховати'
+    } else {
+      this.passMenuText = 'Меню зміни паролю'
+    }
     this.changeMessage = ''
   }
 
