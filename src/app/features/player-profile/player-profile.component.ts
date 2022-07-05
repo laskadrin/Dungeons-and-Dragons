@@ -5,7 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Auth, updateEmail, updatePassword, getAuth, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
 import { user } from 'rxfire/auth';
 import { updateProfile } from 'firebase/auth';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { observable } from 'rxjs';
+import { storage } from 'firebase-admin';
+
+
+
 
 
 @Component({
@@ -13,6 +19,7 @@ import { Observable } from 'rxjs';
   templateUrl: './player-profile.component.html',
   styleUrls: ['./player-profile.component.css']
 })
+
 export class PlayerProfileComponent implements OnInit {
 
   @Output() formData: EventEmitter<{
@@ -36,18 +43,29 @@ export class PlayerProfileComponent implements OnInit {
   constructor(
 
     private fb: FormBuilder,
-    public dashboardComponent: DashboardComponent
+    public dashboardComponent: DashboardComponent,
+
   ) { }
 
 
 
   user = getAuth().currentUser;
 
+
   newUserPassword: string;
   newUserEmail: string;
 
   displayName = getAuth().currentUser?.displayName;
   email = getAuth().currentUser?.email;
+
+  storage = getStorage();
+  photoName = this.email + '_avatar';
+
+  photoPath = '';
+  storageRef = ref(this.storage, 'avatars/' + this.photoName);
+
+
+
 
   passwordChangeActive: boolean = false;
   displayNameChangeActive: boolean = false;
@@ -67,7 +85,8 @@ export class PlayerProfileComponent implements OnInit {
   successEmailMessage: string = '';
   errorEmailOccured: boolean = false;
 
-  photoPath = '';
+
+
 
 
 
@@ -85,9 +104,9 @@ export class PlayerProfileComponent implements OnInit {
       newEmailConfirm: ['', Validators.required],
       newEmailPassword: ['', Validators.required]
     })
-    if (this.photoPath == '') {
-      this.photoPath = '../../../assets/default-profile-avatar.png'
-    }
+
+    this.loadAvatar();
+
   }
 
   get oldPassword() {
@@ -268,6 +287,25 @@ export class PlayerProfileComponent implements OnInit {
     this.changeNameMessage = '';
     this.successNameMessage = '';
   }
+
+  loadAvatar() {
+    getDownloadURL(ref(this.storage, 'avatars/' + this.photoName)).then((url) => {
+      this.photoPath = url;
+    }).catch((e) => {
+      if (e) {
+        this.photoPath = '../../../assets/default-profile-avatar.png'
+      }
+    })
+  }
+
+  uploadFile() {
+    const file = (document.getElementById('avatar') as any).files[0];
+    uploadBytes(this.storageRef, file).then(() => this.loadAvatar());
+
+  }
+
+
+
 
 
 }
