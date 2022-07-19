@@ -10,6 +10,7 @@ export const environment = {
     apiKey: 'AIzaSyB2vJe2Ju-FWnWmj2qp-0ErZdu4s1gH9lU',
     authDomain: 'dungeons-and-dragons-4e03a.firebaseapp.com',
     messagingSenderId: '219252207310',
+    databaseURL: "https://dungeons-and-dragons-4e03a-default-rtdb.europe-west1.firebasedatabase.app",
   },
   production: false
 };

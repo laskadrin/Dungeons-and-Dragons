@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CharactersService } from 'src/app/core/services/shared/characters.service';
+import { Char } from 'src/app/core/interfaces/char';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Auth, updateEmail, updatePassword, getAuth, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
@@ -7,8 +8,10 @@ import { user } from 'rxfire/auth';
 import { updateProfile } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { child, getDatabase, ref as refD, set, get } from 'firebase/database';
 import { observable } from 'rxjs';
 import { storage } from 'firebase-admin';
+import { KeyValue } from '@angular/common';
 
 
 
@@ -48,17 +51,19 @@ export class PlayerProfileComponent implements OnInit {
   ) { }
 
 
-
+  //Отримуєм користувача з файрбейса
   user = getAuth().currentUser;
 
 
   newUserPassword: string;
   newUserEmail: string;
-
+  //Початкові данні користувача
   displayName = getAuth().currentUser?.displayName;
   email = getAuth().currentUser?.email;
-
+  userID = getAuth().currentUser?.uid
+  //Отримуємо доступ до "складу" із фотографіями
   storage = getStorage();
+
   photoName = this.email + '_avatar';
 
   photoPath = '';
@@ -312,7 +317,52 @@ export class PlayerProfileComponent implements OnInit {
   }
 
 
+  db = getDatabase();
+  dbRef = refD(getDatabase());
 
+  characters: { [name in string]: Char };
+  charactersFromDB: object = get(child(this.dbRef, 'users/' + this.userID + '/characters')).then((snapshot) => {
+    if (snapshot.exists()) {
+
+      this.characters = snapshot.val()
+
+      console.log(snapshot.val())
+
+    }
+    else {
+      console.log('no data')
+
+    }
+
+  }).catch((e) => {
+    console.error(e)
+  })
+
+
+  selectedCharacterName: string;
+
+
+
+
+
+  writeUserData() {
+    const db = getDatabase();
+
+    set(refD(db, 'users/' + this.userID), {
+      email: this.email,
+      username: this.displayName,
+      characters: {
+        Mishok: {
+          str: 100,
+          int: 150
+        },
+        Vitolik: {
+          str: 150,
+          int: 100
+        }
+      }
+    });
+  }
 
 
 }

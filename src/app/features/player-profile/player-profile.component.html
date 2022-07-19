@@ -117,13 +117,23 @@
         <div class="characters-main">
             <div class="characters-list">
 
+                <button (click)="selectedCharacterName = char.key" *ngFor="let char of characters | keyvalue"
+                    class="char-button">{{char.key}}</button>
+                <button (click)="writeUserData()">Новий персонаж</button>
+
+
             </div>
             <div class="characters-info">
                 <div class="characters-name">
-
+                    Ім'я персонажа: {{selectedCharacterName}}
                 </div>
                 <div class="characters-stats">
                     <div class="stats-main">
+
+                        <div *ngIf="selectedCharacterName">
+                            Інтелект :{{characters[selectedCharacterName].int}}
+                            Сила :{{characters[selectedCharacterName].str}}
+                        </div>
 
                     </div>
                     <div class="stats-secondary">
