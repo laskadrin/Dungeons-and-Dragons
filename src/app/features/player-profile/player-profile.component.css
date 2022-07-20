@@ -159,6 +159,7 @@ label {
 }
 
 .characters-list {
+
     width: 20vw;
     display: flex;
     flex-direction: column;

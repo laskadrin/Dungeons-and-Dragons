@@ -124,26 +124,57 @@
 
             </div>
             <div class="characters-info">
-                <div class="characters-name">
+                <div class="characters-name" *ngIf="selectedCharacterName">
                     Ім'я персонажа: {{selectedCharacterName}}
                 </div>
                 <div class="characters-stats">
-                    <div class="stats-main">
+                    <div class="stats-main" *ngIf="selectedCharacterName">
 
-                        <div *ngIf="selectedCharacterName">
-                            Інтелект :{{characters[selectedCharacterName].int}}
-                            Сила :{{characters[selectedCharacterName].str}}
-                        </div>
+
+                        <span> Сила: {{characters[selectedCharacterName].str}}</span>
+                        <span> Спритність: {{characters[selectedCharacterName].dex}}</span>
+                        <span> Статура: {{characters[selectedCharacterName].con}}</span>
+                        <span> Інтелект: {{characters[selectedCharacterName].int}}</span>
+                        <span> Мудрість: {{characters[selectedCharacterName].wis}}</span>
+                        <span> Харизма: {{characters[selectedCharacterName].cha}}</span>
+
 
                     </div>
-                    <div class="stats-secondary">
-
+                    <div class="stats-secondary" *ngIf="selectedCharacterName">
+                        <span> Актобатика: {{characters[selectedCharacterName].acro}}</span>
+                        <span> Атлетика: {{characters[selectedCharacterName].athl}}</span>
+                        <span> Магія: {{characters[selectedCharacterName].magi}}</span>
+                        <span> Обман: {{characters[selectedCharacterName].dece}}</span>
+                        <span> Історія: {{characters[selectedCharacterName].hist}}</span>
+                        <span> Проникливість: {{characters[selectedCharacterName].perc}}</span>
+                        <span> Залякування: {{characters[selectedCharacterName].inti}}</span>
+                        <span> Розслідування: {{characters[selectedCharacterName].inve}}</span>
+                        <span> Медицина: {{characters[selectedCharacterName].medi}}</span>
+                        <span> Природа: {{characters[selectedCharacterName].natu}}</span>
+                        <span> Сприйняття: {{characters[selectedCharacterName].perc1}}</span>
+                        <span> Виступ: {{characters[selectedCharacterName].perf}}</span>
+                        <span> Переконання: {{characters[selectedCharacterName].conv}}</span>
+                        <span> Релігія: {{characters[selectedCharacterName].reli}}</span>
+                        <span> Спритність рук: {{characters[selectedCharacterName].lege}}</span>
+                        <span> Скрадання: {{characters[selectedCharacterName].secr}}</span>
+                        <span> Виживання: {{characters[selectedCharacterName].surv}}</span>
+                        <span> Поводження з тваринами: {{characters[selectedCharacterName].pett}}</span>
                     </div>
-                    <div class="inventory">
+                    <div class="armour" *ngIf="selectedCharacterName">
+                        <span> Клас броні: {{characters[selectedCharacterName].armour}}</span>
+                    </div>
+                    <div class="health" *ngIf="selectedCharacterName">
+                        <span> Здоров'я: {{characters[selectedCharacterName].health}}</span>
+                    </div>
+                    <div class="abilities" *ngIf="selectedCharacterName">
+                        <span> Здібності: {{characters[selectedCharacterName].abilities}}</span>
+                    </div>
 
+                    <div class="inventory" *ngIf="selectedCharacterName">
+                        <span> Інвентар: {{characters[selectedCharacterName].inventory}}</span>
                     </div>
                 </div>
-                <div class="characters-additionary">
+                <div class="characters-additionary" *ngIf="selectedCharacterName">
 
                 </div>
             </div>
