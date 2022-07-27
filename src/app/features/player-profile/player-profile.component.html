@@ -119,64 +119,105 @@
 
                 <button (click)="selectedCharacterName = char.key" *ngFor="let char of characters | keyvalue"
                     class="char-button">{{char.key}}</button>
-                <button (click)="writeUserData()">Новий персонаж</button>
+                <button (click)="newCharacterForm = !newCharacterForm">Новий персонаж</button>
 
 
             </div>
             <div class="characters-info">
+                <app-character-form *ngIf="newCharacterForm"></app-character-form>
                 <div class="characters-name" *ngIf="selectedCharacterName">
-                    Ім'я персонажа: {{selectedCharacterName}}
+                    <span>Ім'я персонажа:</span><input type="text" disabled value="{{selectedCharacterName}}">
+
                 </div>
                 <div class="characters-stats">
                     <div class="stats-main" *ngIf="selectedCharacterName">
 
 
-                        <span> Сила: {{characters[selectedCharacterName].str}}</span>
-                        <span> Спритність: {{characters[selectedCharacterName].dex}}</span>
-                        <span> Статура: {{characters[selectedCharacterName].con}}</span>
-                        <span> Інтелект: {{characters[selectedCharacterName].int}}</span>
-                        <span> Мудрість: {{characters[selectedCharacterName].wis}}</span>
-                        <span> Харизма: {{characters[selectedCharacterName].cha}}</span>
+                        <div class="stats-div"><span> Сила: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].str}}"></div>
+                        <div class="stats-div"><span> Спритність: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].dex}}"></div>
+                        <div class="stats-div"><span> Статура: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].con}}"></div>
+                        <div class="stats-div"><span> Інтелект: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].int}}"></div>
+                        <div class="stats-div"><span> Мудрість: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].wis}}"></div>
+                        <div class="stats-div"><span> Харизма: </span><input type="text" disabled
+                                value="{{characters[selectedCharacterName].cha}}"></div>
 
+                        <div class="characters-additionary stats-div" *ngIf="selectedCharacterName">
+                            <span> Особливості: </span><textarea name="additionary" cols="20" rows="10"
+                                disabled></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="armour-health">
+                            <div class="health stats-div" *ngIf="selectedCharacterName">
+                                <span> Здоров'я: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].health}}">
+                            </div>
+                            <div class="armour stats-div" *ngIf="selectedCharacterName">
+                                <span> Клас броні: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].armour}}">
+                            </div>
 
-                    </div>
-                    <div class="stats-secondary" *ngIf="selectedCharacterName">
-                        <span> Актобатика: {{characters[selectedCharacterName].acro}}</span>
-                        <span> Атлетика: {{characters[selectedCharacterName].athl}}</span>
-                        <span> Магія: {{characters[selectedCharacterName].magi}}</span>
-                        <span> Обман: {{characters[selectedCharacterName].dece}}</span>
-                        <span> Історія: {{characters[selectedCharacterName].hist}}</span>
-                        <span> Проникливість: {{characters[selectedCharacterName].perc}}</span>
-                        <span> Залякування: {{characters[selectedCharacterName].inti}}</span>
-                        <span> Розслідування: {{characters[selectedCharacterName].inve}}</span>
-                        <span> Медицина: {{characters[selectedCharacterName].medi}}</span>
-                        <span> Природа: {{characters[selectedCharacterName].natu}}</span>
-                        <span> Сприйняття: {{characters[selectedCharacterName].perc1}}</span>
-                        <span> Виступ: {{characters[selectedCharacterName].perf}}</span>
-                        <span> Переконання: {{characters[selectedCharacterName].conv}}</span>
-                        <span> Релігія: {{characters[selectedCharacterName].reli}}</span>
-                        <span> Спритність рук: {{characters[selectedCharacterName].lege}}</span>
-                        <span> Скрадання: {{characters[selectedCharacterName].secr}}</span>
-                        <span> Виживання: {{characters[selectedCharacterName].surv}}</span>
-                        <span> Поводження з тваринами: {{characters[selectedCharacterName].pett}}</span>
-                    </div>
-                    <div class="armour" *ngIf="selectedCharacterName">
-                        <span> Клас броні: {{characters[selectedCharacterName].armour}}</span>
-                    </div>
-                    <div class="health" *ngIf="selectedCharacterName">
-                        <span> Здоров'я: {{characters[selectedCharacterName].health}}</span>
-                    </div>
-                    <div class="abilities" *ngIf="selectedCharacterName">
-                        <span> Здібності: {{characters[selectedCharacterName].abilities}}</span>
+                        </div>
+                        <div class="stats-secondary" *ngIf="selectedCharacterName">
+                            <div class="stats-div"> <span> Актобатика: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].acro}}"></div>
+                            <div class="stats-div"> <span> Атлетика: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].athl}}"></div>
+                            <div class="stats-div"> <span> Магія: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].magi}}"></div>
+                            <div class="stats-div"> <span> Обман: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].dece}}"></div>
+                            <div class="stats-div"> <span> Історія: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].hist}}"></div>
+                            <div class="stats-div"> <span> Проникливість: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].perc}}"></div>
+                            <div class="stats-div"> <span> Залякування: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].inti}}"></div>
+                            <div class="stats-div"> <span> Розслідування: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].inve}}"></div>
+                            <div class="stats-div"> <span> Медицина: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].medi}}"></div>
+                            <div class="stats-div"> <span> Природа: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].natu}}"></div>
+                            <div class="stats-div"> <span> Сприйняття: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].perc1}}"></div>
+                            <div class="stats-div"> <span> Виступ: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].perf}}"></div>
+                            <div class="stats-div"> <span> Переконання: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].conv}}"></div>
+                            <div class="stats-div"> <span> Релігія: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].reli}}"></div>
+                            <div class="stats-div"> <span> Спритність рук: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].lege}}"></div>
+                            <div class="stats-div"> <span> Скрадання: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].secr}}"></div>
+                            <div class="stats-div"> <span> Виживання: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].surv}}"></div>
+                            <div class="stats-div"> <span> Поводження з тваринами: </span><input type="text" disabled
+                                    value="{{characters[selectedCharacterName].pett}}"></div>
+                        </div>
                     </div>
 
-                    <div class="inventory" *ngIf="selectedCharacterName">
-                        <span> Інвентар: {{characters[selectedCharacterName].inventory}}</span>
+                    <div class="abilities-inventory">
+                        <div class="abilities stats-div" *ngIf="selectedCharacterName">
+                            <span> Здібності: </span>
+                            <textarea name="abilities" cols="40" rows="10"
+                                disabled>{{characters[selectedCharacterName].abilities}}</textarea>
+                        </div>
+
+                        <div class="inventory stats-div" *ngIf="selectedCharacterName">
+                            <span> Інвентар: </span>
+                            <textarea name="inventory" cols="40" rows="10"
+                                disabled>{{characters[selectedCharacterName].inventory}}</textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="characters-additionary" *ngIf="selectedCharacterName">
 
-                </div>
             </div>
         </div>
     </mat-tab>

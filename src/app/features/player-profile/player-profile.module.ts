@@ -10,12 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { StorageModule } from '@angular/fire/storage'
+import { StorageModule } from '@angular/fire/storage';
+import { CharacterFormComponent } from './character-form/character-form.component'
 
 
 @NgModule({
   declarations: [
-    PlayerProfileComponent
+    PlayerProfileComponent,
+    CharacterFormComponent
   ],
   imports: [
     CommonModule,

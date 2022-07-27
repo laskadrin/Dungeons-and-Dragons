@@ -92,7 +92,7 @@ export class PlayerProfileComponent implements OnInit {
 
   passMenuText: string = 'Меню зміни паролю';
 
-
+  newCharacterForm: boolean = false;
 
 
 

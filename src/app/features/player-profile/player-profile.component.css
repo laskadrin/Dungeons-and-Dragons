@@ -149,6 +149,12 @@ label {
 }
 
 
+.characters-name {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15%;
+    margin-bottom: 5vh;
+}
 
 .characters-main {
     margin-top: 3vh;
@@ -173,4 +179,43 @@ label {
 
 .characters-info {
     width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.characters-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.armour-health {
+    display: flex;
+    flex-direction: column;
+}
+
+.abilities-inventory {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stats-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stats-div>span {
+    margin-right: 0.5vw;
+}
+
+.health,
+.armour {
+    margin-bottom: 1vh;
+
+}
+
+.characters-additionary {
+    margin-top: 3vh;
 }

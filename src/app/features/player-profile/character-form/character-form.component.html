@@ -1,0 +1,67 @@
+<form [formGroup]="newCharacterForm">
+    <div class="characters-info">
+        <div class="characters-name">
+            <span>Ім'я персонажа:</span><input type="text" formControlName="name">
+
+        </div>
+        <div class="characters-stats">
+            <div class="stats-main">
+
+                <div class="stats-div" *ngFor="let stat of statsPrimary"><span>{{stat}}</span><input
+                        [formControlName]='stat' type="number"></div>
+
+
+                <div class="stats-div"><span> Інтелект: </span><input type="number" value=0></div>
+                <div class="stats-div"><span> Мудрість: </span><input type="number" value=0></div>
+                <div class="stats-div"><span> Харизма: </span><input type="number" value=0></div>
+
+                <div class="characters-additionary stats-div">
+                    <span> Особливості: </span><textarea name="additionary" cols="20"
+                        rows="10">Жодних особливостей</textarea>
+                </div>
+            </div>
+            <div>
+                <div class="armour-health">
+                    <div class="health stats-div">
+                        <span> Здоров'я: </span><input type="number" value=0>
+                    </div>
+                    <div class="armour stats-div">
+                        <span> Клас броні: </span><input type="number" value=0>
+                    </div>
+
+                </div>
+                <div class="stats-secondary">
+                    <div class="stats-div"> <span> Актобатика: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Атлетика: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Магія: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Обман: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Історія: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Проникливість: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Залякування: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Розслідування: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Медицина: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Природа: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Сприйняття: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Виступ: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Переконання: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Релігія: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Спритність рук: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Скрадання: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Виживання: </span><input type="number" value=0></div>
+                    <div class="stats-div"> <span> Поводження з тваринами: </span><input type="number" value=0></div>
+                </div>
+            </div>
+
+            <div class="abilities-inventory">
+                <div class="abilities stats-div">
+                    <span> Здібності: </span><textarea name="abilities" cols="40" rows="10">Жодних здібностей</textarea>
+                </div>
+
+                <div class="inventory stats-div">
+                    <span> Інвентар: </span><textarea name="inventory" cols="40" rows="10">Пусто</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button (click)="writeData()">Створити персонажа</button>
+</form>
