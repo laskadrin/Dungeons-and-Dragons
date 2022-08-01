@@ -345,85 +345,10 @@ export class PlayerProfileComponent implements OnInit {
 
   }
 
-
-
-
-  writeUserData() {
-    const db = getDatabase();
-
-    set(refD(db, 'users/' + this.userID), {
-      email: this.email,
-      username: this.displayName,
-      characters: {
-        Mishok: {
-
-          str: 10,
-          dex: 10,
-          con: 11,
-          int: 12,
-          wis: 13,
-          cha: 14,
-
-          acro: 12,
-          athl: 10,
-          magi: 11,
-          dece: 11,
-          hist: 11,
-          perc: 11,
-          inti: 11,
-          inve: 11,
-          medi: 12,
-          natu: 13,
-          perc1: 13,
-          perf: 12,
-          conv: 11,
-          reli: 10,
-          lege: 14,
-          secr: 11,
-          surv: 122,
-          pett: 12,
-
-          inventory: 'Мішок',
-          abilities: 'Корішок',
-          health: 20,
-          armour: 14
-        },
-        Vitolik: {
-          str: 12,
-          dex: 102,
-          con: 112,
-          int: 122,
-          wis: 132,
-          cha: 142,
-
-          acro: 121,
-          athl: 101,
-          magi: 111,
-          dece: 111,
-          hist: 111,
-          perc: 111,
-          inti: 111,
-          inve: 111,
-          medi: 121,
-          natu: 131,
-          perc1: 113,
-          perf: 121,
-          conv: 111,
-          reli: 101,
-          lege: 141,
-          secr: 111,
-          surv: 12,
-          pett: 122,
-
-          inventory: 'Вітолік',
-          abilities: 'Бухать',
-          health: 20,
-          armour: 14
-        }
-      }
-    });
-    this.getCharactersFromDB();
+  checker() {
+    if (this.newCharacterForm == true) {
+      this.newCharacterForm = false
+    }
   }
-
 
 }

@@ -12,12 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StorageModule } from '@angular/fire/storage';
 import { CharacterFormComponent } from './character-form/character-form.component'
+import { StatsTranslationPipe } from 'src/app/core/interfaces/pipes/stats-translation.pipe';
 
 
 @NgModule({
   declarations: [
     PlayerProfileComponent,
-    CharacterFormComponent
+    CharacterFormComponent,
+    StatsTranslationPipe
   ],
   imports: [
     CommonModule,

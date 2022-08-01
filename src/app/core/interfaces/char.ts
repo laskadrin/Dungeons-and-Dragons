@@ -30,4 +30,5 @@ export interface Char {
     abilities: string;
     health: number;
     armour: number;
+    additionary: string;
 }

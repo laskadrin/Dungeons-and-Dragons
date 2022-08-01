@@ -117,9 +117,10 @@
         <div class="characters-main">
             <div class="characters-list">
 
-                <button (click)="selectedCharacterName = char.key" *ngFor="let char of characters | keyvalue"
+                <button (click)="selectedCharacterName = char.key; checker()" *ngFor="let char of characters | keyvalue"
                     class="char-button">{{char.key}}</button>
-                <button (click)="newCharacterForm = !newCharacterForm">Новий персонаж</button>
+                <button (click)="newCharacterForm = !newCharacterForm; selectedCharacterName = ''">Новий
+                    персонаж</button>
 
 
             </div>
@@ -148,7 +149,7 @@
 
                         <div class="characters-additionary stats-div" *ngIf="selectedCharacterName">
                             <span> Особливості: </span><textarea name="additionary" cols="20" rows="10"
-                                disabled></textarea>
+                                disabled>{{characters[selectedCharacterName].additionary}}</textarea>
                         </div>
                     </div>
                     <div>
