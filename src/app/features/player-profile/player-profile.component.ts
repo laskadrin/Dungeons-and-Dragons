@@ -12,6 +12,7 @@ import { child, getDatabase, ref as refD, set, get } from 'firebase/database';
 import { observable } from 'rxjs';
 import { storage } from 'firebase-admin';
 import { KeyValue } from '@angular/common';
+import { remove } from '@angular/fire/database';
 
 
 
@@ -326,17 +327,13 @@ export class PlayerProfileComponent implements OnInit {
 
   selectedCharacterName: string;
   getCharactersFromDB() {
+    this.selectedCharacterName = '';
     get(child(this.dbRef, 'users/' + this.userID + '/characters')).then((snapshot) => {
       if (snapshot.exists()) {
-
         this.characters = snapshot.val()
-
-        console.log(snapshot.val())
-
       }
       else {
-        console.log('no data')
-
+        this.characters = {};
       }
 
     }).catch((e) => {
@@ -349,6 +346,15 @@ export class PlayerProfileComponent implements OnInit {
     if (this.newCharacterForm == true) {
       this.newCharacterForm = false
     }
+  }
+
+  deleteCharacter() {
+    remove(refD(this.db, 'users/' + this.userID + '/characters/' + this.selectedCharacterName));
+
+    this.getCharactersFromDB();
+  }
+  editCharacter() {
+
   }
 
 }

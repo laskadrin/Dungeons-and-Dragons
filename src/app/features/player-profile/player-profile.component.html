@@ -218,7 +218,10 @@
                         </div>
                     </div>
                 </div>
-
+                <div *ngIf="selectedCharacterName">
+                    <button (click)="editCharacter()">Редагувати</button>
+                    <button (click)="deleteCharacter()">Видалити персонажа</button>
+                </div>
             </div>
         </div>
     </mat-tab>

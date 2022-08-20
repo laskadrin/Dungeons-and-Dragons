@@ -4,6 +4,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+
   ) { }
   isAdmin: boolean = false;
   ngOnInit(): void {
@@ -29,5 +31,6 @@ export class DashboardComponent implements OnInit {
       .then(() => this.router.navigate(['/']))
       .catch((e) => console.log(e.message));
   }
+
 
 }
