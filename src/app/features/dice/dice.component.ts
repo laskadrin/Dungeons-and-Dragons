@@ -1,8 +1,11 @@
+import { user } from 'rxfire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { interval } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { child, getDatabase, ref, set, get } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-dice',
@@ -11,12 +14,22 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 })
 export class DiceComponent implements OnInit {
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor() { }
   result: number = 0;
   rollingProgress: string = '0';
   diceSize: number = 20;
   diceSizes: number[] = [4, 6, 8, 12, 20, 100];
   isRolling: boolean = false;
+  user = getAuth().currentUser;
+  displayName = this.user?.displayName
+  db = getDatabase()
+  dbRef = ref(this.db);
+  databaseRollObj = {
+    person: '',
+    size: '',
+    result: ''
+  };
+
 
   customDiceSizeFormControl = new FormControl(50);
 
@@ -27,13 +40,14 @@ export class DiceComponent implements OnInit {
   rollCustomDiceSize() {
     this.result = Math.ceil(Math.random() * this.customDiceSizeFormControl.value)
     this.rollFunction();
+
   }
 
 
   diceRoll() {
     this.result = Math.ceil(Math.random() * this.diceSize)
     this.rollFunction();
-    this.openSnackBar()
+
   }
 
   rollFunction() {
@@ -50,26 +64,10 @@ export class DiceComponent implements OnInit {
     })
   }
 
-  snackbarDuration: number = 5;
-  openSnackBar() {
-    this._snackBar.openFromComponent(DiceNotification, { duration: this.snackbarDuration * 1000 })
-  }
-
   ngOnInit(): void {
+
   }
 
-}
-@Component({
-  selector: 'DiceNotification',
-  templateUrl: 'DiceNotification.html',
-  styles: [
-    `
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `,
-  ],
-})
-export class DiceNotification {
+
 
 }
