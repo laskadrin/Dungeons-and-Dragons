@@ -1,0 +1,34 @@
+<div class="personal-email">
+    <span> Ваша електронна пошта: </span>
+    <div>
+        <span>{{this.email}} </span>
+        <button class="btn" type="button" (click)="emailFormButton()">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+</div>
+<form class="emailForm personal-email" [formGroup]="emailForm" (ngSubmit)="onSubmitEmail()" *ngIf="emailChangeActive">
+    <mat-form-field class="form-control">
+        <mat-label>Новий E-mail</mat-label>
+        <input matInput formControlName="newEmail" type="email" required>
+        <mat-error *ngIf="newEmail?.hasError('required')">Введіть новий E-mail
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-control">
+        <mat-label>Підтвердження нового E-mail</mat-label>
+        <input matInput formControlName="newEmailConfirm" type="email" required>
+        <mat-error *ngIf="newEmailConfirm?.hasError('required')">Введіть підтвердження нового E-mail
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-control">
+        <mat-label>Ваш пароль</mat-label>
+        <input matInput formControlName="newEmailPassword" type="password" required>
+        <mat-error *ngIf="newEmailPassword?.hasError('required')">Введіть ваш пароль
+        </mat-error>
+    </mat-form-field>
+    <button mat-button type="submit" class="submit-Button">Змінити E-mail</button>
+</form>
+<div class="personal-email">
+    <div class="email-success">{{successEmailMessage}}</div>
+    <div class="email-error">{{changeEmailMessage}}</div>
+</div>

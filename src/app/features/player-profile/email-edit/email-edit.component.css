@@ -1,0 +1,47 @@
+.personal-email {
+    margin-left: 3vw;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.emailForm {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: space-between;
+}
+
+.email-success {
+    color: green;
+}
+
+.email-error {
+    color: red;
+}
+
+.submit-Button {
+    background-color: indigo;
+    border-radius: 20px;
+    color: #fff;
+
+
+}
+
+.btn {
+    font-size: small;
+    background-color: white;
+    /* Blue background */
+    border: none;
+    /* Remove borders */
+    color: grey;
+    /* White text */
+    padding: 12px 16px;
+    /* Some padding */
+    font-size: 16px;
+    /* Set a font size */
+    cursor: pointer;
+    /* Mouse pointer on hover */
+}

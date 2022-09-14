@@ -1,0 +1,25 @@
+.personal-photo>img {
+    border: 1px solid black;
+    width: 20vw;
+    height: 40vh;
+}
+
+.photo-change {
+    margin-top: 2vh;
+
+}
+
+.personal-photo {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    background-color: indigo;
+    color: white;
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}

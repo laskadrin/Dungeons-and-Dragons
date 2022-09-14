@@ -1,0 +1,8 @@
+<div class="personal-photo">
+    <img src={{photoPath}} alt="Ваше фото">
+    <div class="photo-change">
+        <label for="avatar">Змінити фото профіля</label>
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" hidden (change)="uploadFile()" />
+
+    </div>
+</div>

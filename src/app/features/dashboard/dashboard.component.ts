@@ -25,6 +25,9 @@ export class DashboardComponent implements OnInit {
   }
 
   hiuser = getAuth().currentUser?.displayName;
+  getDisplayName() {
+    this.hiuser = getAuth().currentUser?.displayName;
+  }
   logout() {
     this.authService
       .logout()

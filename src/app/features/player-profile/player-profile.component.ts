@@ -1,17 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CharactersService } from 'src/app/core/services/shared/characters.service';
 import { Char } from 'src/app/core/interfaces/char';
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Auth, updateEmail, updatePassword, getAuth, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
-import { user } from 'rxfire/auth';
-import { updateProfile } from 'firebase/auth';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { getAuth } from '@angular/fire/auth';
+
 import { from, Observable } from 'rxjs';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { child, getDatabase, ref as refD, set, get } from 'firebase/database';
+
+import { child, getDatabase, ref, set, get } from 'firebase/database';
 import { observable } from 'rxjs';
-import { storage } from 'firebase-admin';
-import { KeyValue } from '@angular/common';
+
+
 import { remove } from '@angular/fire/database';
 
 
@@ -26,23 +25,11 @@ import { remove } from '@angular/fire/database';
 
 export class PlayerProfileComponent implements OnInit {
 
-  @Output() formData: EventEmitter<{
-    password: string;
-  }> = new EventEmitter();
-  passwordForm: FormGroup;
+  statsPrimary = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+  statsSecondary = ['acro', 'athl', 'magi', 'dece', 'hist', 'perc', 'inti', 'inve', 'medi', 'natu',
+    'perc1', 'perf', 'conv', 'reli', 'lege', 'secr', 'surv', 'pett']
 
-
-  @Output() nameFormData: EventEmitter<{
-    name: string
-  }> = new EventEmitter();
-  nameForm: FormGroup;
-
-  @Output() emailFormData: EventEmitter<{
-    email: string;
-    password: string;
-  }> = new EventEmitter;
-  emailForm: FormGroup;
-
+  editCharacterForm: FormGroup;
 
   constructor(
 
@@ -52,285 +39,35 @@ export class PlayerProfileComponent implements OnInit {
   ) { }
 
 
-  //Отримуєм користувача з файрбейса
-  user = getAuth().currentUser;
 
-
-  newUserPassword: string;
-  newUserEmail: string;
-  //Початкові данні користувача
-  displayName = getAuth().currentUser?.displayName;
-  email = getAuth().currentUser?.email;
   userID = getAuth().currentUser?.uid
-  //Отримуємо доступ до "складу" із фотографіями
-  storage = getStorage();
 
-  photoName = this.email + '_avatar';
-
-  photoPath = '';
-  storageRef = ref(this.storage, 'avatars/' + this.photoName);
-
-
-
-
-  passwordChangeActive: boolean = false;
-  displayNameChangeActive: boolean = false;
-  emailChangeActive: boolean = false;
-
-  errorCode: string = '';
-
-  changeMessage: string = '';
-  successMessage: string = ' ';
-  errorOccured: boolean = false;
-
-  changeNameMessage: string = '';
-  successNameMessage: string = '';
-  errorNameOccured: boolean = false;
-
-  changeEmailMessage: string = '';
-  successEmailMessage: string = '';
-  errorEmailOccured: boolean = false;
-
-  passMenuText: string = 'Меню зміни паролю';
 
   newCharacterForm: boolean = false;
 
-
-
-
   ngOnInit(): void {
-    this.passwordForm = this.fb.group({
-      oldPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
-      newPasswordConfirm: ['', Validators.required]
-    });
-    this.nameForm = this.fb.group({
-      newDisplayName: ['', Validators.required]
-    })
-    this.emailForm = this.fb.group({
-      newEmail: ['', Validators.required],
-      newEmailConfirm: ['', Validators.required],
-      newEmailPassword: ['', Validators.required]
-    })
-
-    this.loadAvatar();
     this.getCharactersFromDB();
-
-  }
-
-  get oldPassword() {
-    return this.passwordForm.get('oldPassword')
-  }
-  get newPassword() {
-    return this.passwordForm.get('newPassword')
-  }
-  get newPasswordConfirm() {
-    return this.passwordForm.get('newPasswordConfirm')
-  }
-
-  get newDisplayName() {
-    return this.nameForm.get('newDisplayName')
-  }
-
-  get newEmail() {
-    return this.emailForm.get('newEmail')
-  }
-  get newEmailConfirm() {
-    return this.emailForm.get('newEmailConfirm')
-  }
-  get newEmailPassword() {
-    return this.emailForm.get('newEmailPassword')
-  }
-
-  onSubmitPassword() {
-    if (this.passwordForm.valid && this.passwordChangeActive) {
-      this.formData.emit(this.passwordForm.value);
-      this.changePassword();
-    }
-
-
-  }
-  onSubmitName() {
-    if (this.nameForm.valid && this.displayNameChangeActive) {
-      this.nameFormData.emit(this.nameForm.value);
-      this.changeDisplayName();
+    if (this.selectedCharacterName) {
+      const stats = [...this.statsPrimary, ...this.statsSecondary]
+      const formValue: any = this.characters[this.selectedCharacterName]
+      this.editCharacterForm = this.fb.group(formValue);
     }
   }
-  onSubmitEmail() {
-    if (this.emailForm.valid && this.emailChangeActive) {
-      this.emailFormData.emit(this.nameForm.value);
-      this.changeEmail();
-    }
-  }
-
-  changePassword() {
-    console.log('Password change button clicked');
-    this.errorOccured = false;
-    this.changeMessage = '';
-    this.successMessage = ''
-    this.newUserPassword = this.newPassword?.value;
-    if (this.newPassword?.value == this.newPasswordConfirm?.value) {
-      if (this.user && typeof this.email == 'string') {
-
-        const credential = EmailAuthProvider.credential(
-          this.email,
-          this.oldPassword?.value
-        )
-        reauthenticateWithCredential(this.user, credential).then(() => {
-          if (this.user) {
-            updatePassword(this.user, this.newUserPassword).then(() => {
-              this.passwordChangeActive = false;
-              this.successMessage = 'Ви успішно змінили пароль для входу у ваш акаунт'
-              console.log('change successful')
-            }).catch((e) => {
-              console.log(e.code);
-              this.errorOccured = true;
-              this.errorCode = e.code;
-              if (this.errorCode == 'auth/weak-password') {
-
-                this.changeMessage = 'Новий пароль заслабкий. Введіть принаймні 6 символів';
-              }
-              else {
-
-                this.changeMessage = 'Невідома помилка. Будь ласка, повторіть спробу пізніше';
-              };
-            });
-          }
-        }).catch((e) => {
-          console.log(e.code);
-          this.errorOccured = true;
-          this.errorCode = e.code;
-          if (this.errorCode == 'auth/wrong-password') {
-
-            this.changeMessage = 'Ваш старий пароль введено неправильно.'
-          } else {
-
-            this.changeMessage = 'Невідома помилка. Будь ласка, повторіть спробу входу пізніше (Помилка реавторизації)'
-          }
-
-        })
-      }
-    } else {
-      this.errorOccured = true;
-      this.changeMessage = 'Паролі не співпадають'
-    }
-
-  }
-  passwordFormButton() {
-    this.passwordChangeActive = !this.passwordChangeActive;
-    if (this.passwordChangeActive) {
-      this.passMenuText = 'Приховати'
-    } else {
-      this.passMenuText = 'Меню зміни паролю'
-    }
-    this.changeMessage = ''
-  }
-
-  changeEmail() {
-    console.log('Email change button clicked')
-    this.errorEmailOccured = false;
-    this.changeEmailMessage = '';
-    this.successEmailMessage = '';
-    if (this.newEmail?.value == this.newEmailConfirm?.value) {
-      if (this.user && typeof this.email == 'string') {
-        const credential = EmailAuthProvider.credential(
-          this.email,
-          this.newEmailPassword?.value
-        )
-        reauthenticateWithCredential(this.user, credential).then(() => {
-          if (this.user) {
-            updateEmail(this.user, this.newEmail?.value).then(() => {
-              this.email = this.newEmail?.value;
-              this.successEmailMessage = 'E-mail успішно зміненно';
-              this.emailChangeActive = !this.emailChangeActive;
-            }).catch((e) => {
-              console.log(e.code);
-              this.errorEmailOccured = true;
-              this.errorCode = e.code;
-              if (this.errorCode == 'auth/email-already-in-use') {
-                this.changeEmailMessage = 'Користувач із таким E-mail уже існує'
-              } else if (this.errorCode == 'auth/invalid-email') {
-                this.changeEmailMessage = 'E-mail некоректний або неіснуючий'
-              } else {
-                this.changeEmailMessage = 'Невідома помилка. Будь ласка, повторіть спробу пізніше'
-              };
-            });
-          }
-        }).catch((e) => {
-          console.log(e.code);
-          this.errorEmailOccured = true;
-          this.errorCode = e.code;
-          if (this.errorCode == 'auth/wrong-password') {
-            this.changeEmailMessage = 'Ви ввели неправильний пароль.'
-          } else {
-            this.changeEmailMessage = 'Невідома помилка. Будь ласка, повторіть спробу входу пізніше (Помилка реавторизації)'
-          }
-        })
-      }
-    } else {
-      this.errorEmailOccured = true;
-      this.changeEmailMessage = 'Введені E-mail адреси не співпадають'
-    }
-  }
-
-  emailFormButton() {
-    this.emailChangeActive = !this.emailChangeActive;
-    this.changeEmailMessage = ''
-    this.successEmailMessage = '';
-  }
-
-  changeDisplayName() {
-    console.log('Name change button clicked');
-    this.errorNameOccured = false;
-    this.changeNameMessage = '';
-    this.successNameMessage = '';
-    if (this.user) {
-      updateProfile(this.user, { displayName: this.newDisplayName?.value }).then(() => {
-        this.displayName = this.newDisplayName?.value;
-        this.successNameMessage = 'Псевдонім успішно зміненно';
-        this.displayNameChangeActive = !this.displayNameChangeActive;
-      }).catch((e) => {
-        this.errorNameOccured = true;
-        this.changeNameMessage = 'При зміні псевдоніму сталась помилка. Спробуйте, будь ласка, пізніше' + e.code;
-      })
-    }
-
-  }
-  displayNameFormButton() {
-    this.displayNameChangeActive = !this.displayNameChangeActive;
-    this.changeNameMessage = '';
-    this.successNameMessage = '';
-  }
-
-  loadAvatar() {
-    getDownloadURL(ref(this.storage, 'avatars/' + this.photoName)).then((url) => {
-      this.photoPath = url;
-    }).catch((e) => {
-      if (e) {
-        this.photoPath = '../../../assets/default-profile-avatar.png'
-      }
-    })
-  }
-
-  uploadFile() {
-    const file = (document.getElementById('avatar') as any).files[0];
-    uploadBytes(this.storageRef, file).then(() => this.loadAvatar());
-
-  }
-
 
   db = getDatabase();
-  dbRef = refD(getDatabase());
+  dbRef = ref(getDatabase());
 
   characters: { [name in string]: Char };
 
-
   selectedCharacterName: string;
+
   getCharactersFromDB() {
     this.selectedCharacterName = '';
     get(child(this.dbRef, 'users/' + this.userID + '/characters')).then((snapshot) => {
       if (snapshot.exists()) {
         this.characters = snapshot.val()
+
+        console.log(this.characters[this.selectedCharacterName])
       }
       else {
         this.characters = {};
@@ -349,12 +86,17 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   deleteCharacter() {
-    remove(refD(this.db, 'users/' + this.userID + '/characters/' + this.selectedCharacterName));
+    remove(ref(this.db, 'users/' + this.userID + '/characters/' + this.selectedCharacterName));
 
     this.getCharactersFromDB();
   }
+
   editCharacter() {
+    const db = getDatabase();
 
+    set(ref(db, 'users/' + this.userID + '/characters' + this.selectedCharacterName), {
+      [this.editCharacterForm.value.name]: this.editCharacterForm.value
+    })
+    this.getCharactersFromDB();
   }
-
 }

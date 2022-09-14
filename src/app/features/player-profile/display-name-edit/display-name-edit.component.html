@@ -1,0 +1,27 @@
+<div class="personal-username">
+    <span> Ваш псевдонім: </span>
+    <div>
+        <span>{{this.displayName}} </span>
+        <button class="btn" type="button" (click)="displayNameFormButton()">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+</div>
+<form class="nameForm personal-username" [formGroup]="nameForm" (ngSubmit)="onSubmitName()"
+    *ngIf="displayNameChangeActive">
+    <mat-form-field class="form-control">
+        <mat-label>Новий псевдонім</mat-label>
+
+        <input matInput formControlName="newDisplayName" type="text" required>
+        <mat-error *ngIf="newDisplayName?.hasError('required')">Введіть новий псевдонім
+        </mat-error>
+
+    </mat-form-field>
+
+    <button mat-button type="submit" class="submit-Button">Змінити псевдонім</button>
+
+</form>
+<div class="personal-username">
+    <div class="username-success">{{successNameMessage}}</div>
+    <div class="username-error">{{changeNameMessage}}</div>
+</div>
